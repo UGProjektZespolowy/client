@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1>Wynik dla {{search}}</h1>
-    <template v-for="(news, collection) in search_results" v-if="!loading">
-      <template v-if="news.length > 0">
-        <h3>Sekcja: <b>{{collection_resolvers[collection]}}</b> </h3>
-        <news-card v-for="info in news" :news="info" :key="info._id"></news-card>
+    <h1>Wyniki dla "{{search}}"</h1>
+    <template v-if="!loading">
+      <template v-for="(news, collection) in search_results">
+        <template v-if="news.length > 0">
+          <h3 :key="collection">Sekcja: <b>{{collection_resolvers[collection]}}</b> </h3>
+          <news-card v-for="info in news" :news="info" :key="info._id"></news-card>
+        </template>
       </template>
     </template>
-    <loading-spinner v-else></loading-spinner>
+    <template v-if="no_results">
+      <h3 style="margin-top: 50px;">Brak wyników dla tego hasła</h3>
+    </template>
+    <loading-spinner v-if="loading"></loading-spinner>
   </div>
 </template>
 <script>
@@ -15,7 +20,6 @@ import axios from "axios";
 import {mapGetters, mapActions} from "vuex";
 import NewsCard from "../component/news-card";
 import LoadingSpinner from "../component/loading-spinner";
-
   export default {
     components: {NewsCard, LoadingSpinner},
     data() {
@@ -49,6 +53,9 @@ import LoadingSpinner from "../component/loading-spinner";
         set(value) {
           this.SET_SEARCH_RESULTS(value);
         }
+      },
+      no_results() {
+        return Object.values(this.search_results).every(arr => arr.length === 0) && !this.loading;
       }
     },
     created() {

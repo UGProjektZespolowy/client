@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 import App from "./views/main.vue";
 import router from "./router";
 import ConstantMixin from "./config/constant_mixins";
+import store from "./vuex/state";
 
 axios.defaults.baseURL = "http://localhost:8000/api/"
 
@@ -19,6 +20,6 @@ Vue.mixin(ConstantMixin);
 
 new Vue({
     router,
-    store: require("./vuex/state").default,
+    store: store(),
     render: (h) => h(App),
 }).$mount("#app");

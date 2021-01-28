@@ -21,7 +21,12 @@ const routes = [
         name: "Informatyka",
         component: Sources,
         props: {source: 'cs'}
-    }, {
+    },{
+        path: "/ug",
+        name: "Uniwersytet Gdański",
+        component: Sources,
+        props: {source: 'ug'}
+    },{
         path: "/search/:text",
         name: "Search",
         component: SearchResults

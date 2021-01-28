@@ -11,6 +11,7 @@
             <b-nav-item href="/">Lista źródeł</b-nav-item>
             <b-nav-item href="/mfi">MFI</b-nav-item>
             <b-nav-item href="/informatyka">Informatyka</b-nav-item>
+            <b-nav-item href="/ug">UG</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
